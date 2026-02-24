@@ -52,6 +52,8 @@ banners banner:generate "My Project" ./banner.png \
   --packageManager="composer require" \
   --packageName="vendor/package" \
   --description="A great PHP package" \
+  --md \
+  --showWatermark \
   --fileType=png
 ```
 
@@ -81,12 +83,16 @@ Save default values so you don't have to pass them every time.
 banners config:init
 ```
 
+The wizard configures: theme, style, pattern, fontSize, markdown rendering, watermark, and file type.
+
 ### Set individual values
 
 ```bash
 banners config:set theme dark
 banners config:set pattern texture
 banners config:set fontSize 72px
+banners config:set md true
+banners config:set showWatermark true
 ```
 
 ### View current config
@@ -108,13 +114,13 @@ cd banners-cli
 composer install
 
 # Run tests
-php vendor/bin/pest
+composer test
 
 # Run code formatting
-php vendor/bin/pint
+composer lint
 
 # Build PHAR
-php banners app:build banners
+composer build
 ```
 
 ## License
