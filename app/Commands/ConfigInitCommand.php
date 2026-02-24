@@ -63,51 +63,19 @@ final class ConfigInitCommand extends Command
             placeholder: '96px',
         );
 
-        $packageManager = text(
-            label: 'Package manager (optional):',
-            default: '',
-            placeholder: 'composer require',
-        );
-
-        $packageName = text(
-            label: 'Package name (optional):',
-            default: '',
-            placeholder: 'vendor/package',
-        );
-
-        $description = text(
-            label: 'Default description (optional):',
-            default: '',
-        );
-
-        $md = confirm(
-            label: 'Enable markdown rendering?',
-            default: false,
-        );
-
-        $showWatermark = confirm(
-            label: 'Show watermark?',
-            default: false,
-        );
-
         $fileType = select(
             label: 'Default file type:',
             options: collect(FileType::cases())->mapWithKeys(fn (FileType $f) => [$f->value => $f->label()])->all(),
             default: FileType::Png->value,
         );
 
-        $config = array_filter([
+        $config = [
             'theme' => $theme,
             'style' => $style,
             'pattern' => $pattern,
             'fontSize' => $fontSize,
-            'packageManager' => $packageManager,
-            'packageName' => $packageName,
-            'description' => $description,
-            'md' => $md,
-            'showWatermark' => $showWatermark,
             'fileType' => $fileType,
-        ], fn ($value) => $value !== '' && $value !== null);
+        ];
 
         $configService->init($config);
 
