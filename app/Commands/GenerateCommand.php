@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\DTOs\BannerOptions;
-use App\Enums\FileType;
-use App\Enums\Pattern;
-use App\Enums\Style;
-use App\Enums\Theme;
 use App\Services\BannerService;
 use App\Services\ConfigService;
 use LaravelZero\Framework\Commands\Command;
