@@ -1,3 +1,9 @@
+<div class="filament-hidden">
+
+![Banners CLI](https://raw.githubusercontent.com/jeffersongoncalves/banners-cli/main/art/jeffersongoncalves-banners-cli.png)
+
+</div>
+
 # Banners CLI
 
 <p align="center">
