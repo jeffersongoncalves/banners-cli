@@ -1,41 +1,122 @@
-<p align="center">
-    <img title="Laravel Zero" height="100" src="https://raw.githubusercontent.com/laravel-zero/docs/master/images/logo/laravel-zero-readme.png" alt="Laravel Zero Logo" />
-</p>
+# Banners CLI
 
 <p align="center">
-  <a href="https://github.com/laravel-zero/framework/actions"><img src="https://github.com/laravel-zero/laravel-zero/actions/workflows/tests.yml/badge.svg" alt="Build Status" /></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/dt/laravel-zero/framework.svg" alt="Total Downloads" /></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/v/laravel-zero/framework.svg?label=stable" alt="Latest Stable Version" /></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/l/laravel-zero/framework.svg" alt="License" /></a>
+  <a href="https://github.com/jeffersongoncalves/banners-cli/actions/workflows/run-tests.yml"><img src="https://github.com/jeffersongoncalves/banners-cli/actions/workflows/run-tests.yml/badge.svg" alt="Tests" /></a>
+  <a href="https://github.com/jeffersongoncalves/banners-cli/actions/workflows/build.yml"><img src="https://github.com/jeffersongoncalves/banners-cli/actions/workflows/build.yml/badge.svg" alt="Build" /></a>
+  <a href="https://github.com/jeffersongoncalves/banners-cli/releases/latest"><img src="https://img.shields.io/github/v/release/jeffersongoncalves/banners-cli" alt="Latest Release" /></a>
+  <img src="https://img.shields.io/badge/php-%3E%3D8.2-8892BF" alt="PHP 8.2+" />
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/jeffersongoncalves/banners-cli" alt="License" /></a>
 </p>
 
-Laravel Zero was created by [Nuno Maduro](https://github.com/nunomaduro) and [Owen Voke](https://github.com/owenvoke), and is a micro-framework that provides an elegant starting point for your console application. It is an **unofficial** and customized version of Laravel optimized for building command-line applications.
+CLI tool to generate banner images using the [beyondcode/banners](https://banners.beyondco.de/) service. Configure default parameters and generate banners with a single command.
 
-- Built on top of the [Laravel](https://laravel.com) components.
-- Optional installation of Laravel [Eloquent](https://laravel-zero.com/docs/database/), Laravel [Logging](https://laravel-zero.com/docs/logging/) and many others.
-- Supports interactive [menus](https://laravel-zero.com/docs/build-interactive-menus/) and [desktop notifications](https://laravel-zero.com/docs/send-desktop-notifications/) on Linux, Windows & MacOS.
-- Ships with a [Scheduler](https://laravel-zero.com/docs/task-scheduling/) and  a [Standalone Compiler](https://laravel-zero.com/docs/build-a-standalone-application/).
-- Integration with [Collision](https://github.com/nunomaduro/collision) - Beautiful error reporting
-- Follow the creator Nuno Maduro:
-    - YouTube: **[youtube.com/@nunomaduro](https://www.youtube.com/@nunomaduro)** — Videos every weekday
-    - Twitch: **[twitch.tv/enunomaduro](https://www.twitch.tv/enunomaduro)** — Streams (almost) every weekday
-    - Twitter / X: **[x.com/enunomaduro](https://x.com/enunomaduro)**
-    - LinkedIn: **[linkedin.com/in/nunomaduro](https://www.linkedin.com/in/nunomaduro)**
-    - Instagram: **[instagram.com/enunomaduro](https://www.instagram.com/enunomaduro)**
-    - Tiktok: **[tiktok.com/@enunomaduro](https://www.tiktok.com/@enunomaduro)**
+## Requirements
 
-------
+- PHP >= 8.2
 
-## Documentation
+## Installation
 
-For full documentation, visit [laravel-zero.com](https://laravel-zero.com/).
+### Download PHAR (recommended)
 
-## Support the development
-**Do you like this project? Support it by donating**
+Download the latest `banners.phar` from the [Releases](https://github.com/jeffersongoncalves/banners-cli/releases) page:
 
-- PayPal: [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L)
-- Patreon: [Donate](https://www.patreon.com/nunomaduro)
+```bash
+# Download and make executable
+curl -sL https://github.com/jeffersongoncalves/banners-cli/releases/latest/download/banners.phar -o banners
+chmod +x banners
+sudo mv banners /usr/local/bin/banners
+```
+
+### Via Composer (global)
+
+```bash
+composer global require jeffersongoncalves/banners-cli
+```
+
+## Usage
+
+### Generate a banner
+
+```bash
+banners banner:generate "My Project" ./banner.png
+```
+
+### With options
+
+```bash
+banners banner:generate "My Project" ./banner.png \
+  --theme=dark \
+  --style=style_2 \
+  --pattern=texture \
+  --fontSize=72px \
+  --packageManager="composer require" \
+  --packageName="vendor/package" \
+  --description="A great PHP package" \
+  --fileType=png
+```
+
+### Available options
+
+| Option | Values | Default |
+|--------|--------|---------|
+| `--theme` | `light`, `dark` | `light` |
+| `--style` | `style_1`, `style_2` | `style_1` |
+| `--pattern` | 90+ hero-patterns (e.g. `texture`, `topography`, `circuitBoard`) | `circuitBoard` |
+| `--fontSize` | CSS size (e.g. `96px`, `72px`) | `96px` |
+| `--packageManager` | Any text | _(empty)_ |
+| `--packageName` | Any text | _(empty)_ |
+| `--description` | Any text | _(empty)_ |
+| `--md` | Flag (enable markdown) | `false` |
+| `--showWatermark` | Flag | `false` |
+| `--images` | Image URL or heroicon name | _(empty)_ |
+| `--fileType` | `png`, `jpeg` | `png` |
+
+## Configuration
+
+Save default values so you don't have to pass them every time.
+
+### Interactive wizard
+
+```bash
+banners config:init
+```
+
+### Set individual values
+
+```bash
+banners config:set theme dark
+banners config:set pattern texture
+banners config:set fontSize 72px
+```
+
+### View current config
+
+```bash
+banners config:show
+```
+
+Configuration is stored in `~/.banners-cli/config.json`. Command-line options always override config values.
+
+## Development
+
+```bash
+# Clone
+git clone git@github.com:jeffersongoncalves/banners-cli.git
+cd banners-cli
+
+# Install dependencies
+composer install
+
+# Run tests
+php vendor/bin/pest
+
+# Run code formatting
+php vendor/bin/pint
+
+# Build PHAR
+php banners app:build banners
+```
 
 ## License
 
-Laravel Zero is an open-source software licensed under the MIT license.
+Banners CLI is open-source software licensed under the [MIT license](LICENSE).
