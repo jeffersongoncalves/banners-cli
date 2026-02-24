@@ -16,10 +16,10 @@
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.10",
-        "laravel-zero/framework": "^12.0.2",
-        "laravel/pint": "^1.25.1",
-        "mockery/mockery": "^1.6.12",
-        "pestphp/pest": "^3.8.4|^4.1.2"
+        "laravel-zero/framework": "^12.0",
+        "laravel/pint": "^1.25",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^3.8|^4.1"
     },
     "autoload": {
         "psr-4": {
@@ -30,6 +30,16 @@
         "psr-4": {
             "Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "build": ["php banners app:build banners"],
+        "lint": "./vendor/bin/pint",
+        "test:lint": "./vendor/bin/pint --test",
+        "test:unit": "./vendor/bin/pest --parallel",
+        "test": [
+            "@test:unit",
+            "@test:lint"
+        ]
     },
     "config": {
         "preferred-install": "dist",
