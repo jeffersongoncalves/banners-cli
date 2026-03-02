@@ -32,7 +32,10 @@ jobs:
       - run: php banners app:build banners --build-version=${{ steps.previoustag.outputs.tag }}
 
       - name: Pull latest changes before commit
-        run: git pull --rebase origin main
+        run: |
+          git stash --include-untracked
+          git pull --rebase origin main
+          git stash pop || true
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
