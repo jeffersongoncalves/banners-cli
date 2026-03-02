@@ -3,8 +3,8 @@
 use App\Services\ConfigService;
 
 beforeEach(function () {
-    $this->tempDir = sys_get_temp_dir().'/banners-cli-test-'.uniqid();
-    mkdir($this->tempDir, 0755, true);
+    $this->tempDir = sys_get_temp_dir().'/banners-cli-test-'.uniqid('', true);
+    @mkdir($this->tempDir, 0755, true);
     $this->service = new ConfigService($this->tempDir);
 });
 

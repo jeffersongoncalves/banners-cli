@@ -3,8 +3,8 @@
 use App\Services\ConfigService;
 
 it('shows wizard title', function () {
-    $tempDir = sys_get_temp_dir().'/banners-cli-test-'.uniqid();
-    mkdir($tempDir, 0755, true);
+    $tempDir = sys_get_temp_dir().'/banners-cli-test-'.uniqid('', true);
+    @mkdir($tempDir, 0755, true);
     $this->app->instance(ConfigService::class, new ConfigService($tempDir));
 
     // ConfigInit uses Laravel Prompts which require interactive terminal.

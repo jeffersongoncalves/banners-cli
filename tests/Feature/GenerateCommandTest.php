@@ -17,7 +17,7 @@ beforeEach(function () {
 });
 
 it('generates a banner with required arguments', function () {
-    $outputPath = sys_get_temp_dir().'/banners-cli-test-'.uniqid().'.png';
+    $outputPath = sys_get_temp_dir().'/banners-cli-test-'.uniqid('', true).'.png';
 
     $this->artisan('banner:generate', [
         'name' => 'Test Banner',
@@ -32,7 +32,7 @@ it('generates a banner with required arguments', function () {
 });
 
 it('generates a banner with all options', function () {
-    $outputPath = sys_get_temp_dir().'/banners-cli-test-'.uniqid().'.png';
+    $outputPath = sys_get_temp_dir().'/banners-cli-test-'.uniqid('', true).'.png';
 
     $this->artisan('banner:generate', [
         'name' => 'My Project',
@@ -66,7 +66,7 @@ it('shows error on failure', function () {
 
     $this->app->instance(BannerService::class, new BannerService($client));
 
-    $outputPath = sys_get_temp_dir().'/banners-cli-test-'.uniqid().'.png';
+    $outputPath = sys_get_temp_dir().'/banners-cli-test-'.uniqid('', true).'.png';
 
     $this->artisan('banner:generate', [
         'name' => 'Fail',

@@ -3,8 +3,8 @@
 use App\Services\ConfigService;
 
 it('shows warning when no config exists', function () {
-    $tempDir = sys_get_temp_dir().'/banners-cli-test-'.uniqid();
-    mkdir($tempDir, 0755, true);
+    $tempDir = sys_get_temp_dir().'/banners-cli-test-'.uniqid('', true);
+    @mkdir($tempDir, 0755, true);
     $this->app->instance(ConfigService::class, new ConfigService($tempDir));
 
     $this->artisan('config:show')
@@ -15,8 +15,8 @@ it('shows warning when no config exists', function () {
 });
 
 it('shows config table', function () {
-    $tempDir = sys_get_temp_dir().'/banners-cli-test-'.uniqid();
-    mkdir($tempDir, 0755, true);
+    $tempDir = sys_get_temp_dir().'/banners-cli-test-'.uniqid('', true);
+    @mkdir($tempDir, 0755, true);
     $service = new ConfigService($tempDir);
     $service->init(['theme' => 'dark', 'fontSize' => '72px', 'md' => true]);
     $this->app->instance(ConfigService::class, $service);

@@ -51,7 +51,7 @@ describe('BannerService', function () {
         $service = new BannerService($client);
         $options = new BannerOptions(name: 'Test');
 
-        $outputPath = sys_get_temp_dir().'/banners-cli-test-'.uniqid().'.png';
+        $outputPath = sys_get_temp_dir().'/banners-cli-test-'.uniqid('', true).'.png';
 
         $service->generate($options, $outputPath);
 
@@ -71,7 +71,7 @@ describe('BannerService', function () {
         $service = new BannerService($client);
         $options = new BannerOptions(name: 'Test');
 
-        $outputDir = sys_get_temp_dir().'/banners-cli-nested-'.uniqid();
+        $outputDir = sys_get_temp_dir().'/banners-cli-nested-'.uniqid('', true);
         $outputPath = $outputDir.'/banner.png';
 
         $service->generate($options, $outputPath);
