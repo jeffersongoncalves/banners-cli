@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Services\BannerService;
 use App\Services\ConfigService;
+use App\Services\SelfUpdateService;
 use Illuminate\Support\ServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
@@ -19,5 +20,6 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(ConfigService::class);
         $this->app->singleton(BannerService::class);
+        $this->app->singleton(SelfUpdateService::class);
     }
 }
