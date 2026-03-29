@@ -24,6 +24,8 @@ final readonly class BannerOptions
         public bool $showWatermark = false,
         public array $images = [],
         public FileType $fileType = FileType::Png,
+        public ?int $width = null,
+        public ?int $height = null,
     ) {}
 
     public static function fromArray(array $data): self
@@ -41,6 +43,8 @@ final readonly class BannerOptions
             showWatermark: filter_var($data['showWatermark'] ?? false, FILTER_VALIDATE_BOOLEAN),
             images: (array) ($data['images'] ?? []),
             fileType: isset($data['fileType']) ? FileType::from($data['fileType']) : FileType::Png,
+            width: isset($data['width']) ? (int) $data['width'] : null,
+            height: isset($data['height']) ? (int) $data['height'] : null,
         );
     }
 
@@ -59,6 +63,8 @@ final readonly class BannerOptions
             showWatermark: isset($config['showWatermark']) ? filter_var($config['showWatermark'], FILTER_VALIDATE_BOOLEAN) : $this->showWatermark,
             images: ! empty($config['images']) ? (array) $config['images'] : $this->images,
             fileType: isset($config['fileType']) ? FileType::from($config['fileType']) : $this->fileType,
+            width: isset($config['width']) ? (int) $config['width'] : $this->width,
+            height: isset($config['height']) ? (int) $config['height'] : $this->height,
         );
     }
 
@@ -83,6 +89,11 @@ final readonly class BannerOptions
         return http_build_query($params);
     }
 
+    public function needsResize(): bool
+    {
+        return $this->width !== null || $this->height !== null;
+    }
+
     public function toArray(): array
     {
         return [
@@ -98,6 +109,8 @@ final readonly class BannerOptions
             'showWatermark' => $this->showWatermark,
             'images' => $this->images,
             'fileType' => $this->fileType->value,
+            'width' => $this->width,
+            'height' => $this->height,
         ];
     }
 }

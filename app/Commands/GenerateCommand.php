@@ -24,7 +24,9 @@ final class GenerateCommand extends Command
         {--md : Enable markdown rendering}
         {--showWatermark : Show watermark}
         {--images=* : Image URLs or heroicon names}
-        {--fileType= : Output file type (png, jpeg)}';
+        {--fileType= : Output file type (png, jpeg)}
+        {--width= : Resize output width in pixels (e.g. 2560)}
+        {--height= : Resize output height in pixels (e.g. 1440)}';
 
     protected $description = 'Generate a banner image';
 
@@ -45,6 +47,8 @@ final class GenerateCommand extends Command
             'showWatermark' => $this->option('showWatermark') ? '1' : null,
             'images' => $this->option('images') ?: null,
             'fileType' => $this->option('fileType'),
+            'width' => $this->option('width'),
+            'height' => $this->option('height'),
         ], fn ($value) => $value !== null && $value !== '' && $value !== []);
 
         $options = BannerOptions::fromArray(array_merge($config, $data));

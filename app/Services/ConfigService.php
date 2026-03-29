@@ -77,6 +77,8 @@ final class ConfigService
             'showWatermark',
             'images',
             'fileType',
+            'width',
+            'height',
         ];
     }
 

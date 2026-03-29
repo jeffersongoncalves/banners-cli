@@ -53,5 +53,48 @@ final class BannerService
         if (! file_exists($outputPath) || filesize($outputPath) === 0) {
             throw new RuntimeException('Failed to save banner image. File is empty or was not created.');
         }
+
+        if ($options->needsResize()) {
+            $this->resize($outputPath, $options);
+        }
+    }
+
+    private function resize(string $path, BannerOptions $options): void
+    {
+        if (! extension_loaded('gd')) {
+            throw new RuntimeException('GD extension is required for image resizing. Install php-gd.');
+        }
+
+        $source = match ($options->fileType) {
+            \App\Enums\FileType::Jpeg => imagecreatefromjpeg($path),
+            \App\Enums\FileType::Png => imagecreatefrompng($path),
+        };
+
+        if ($source === false) {
+            throw new RuntimeException('Failed to read downloaded banner image for resizing.');
+        }
+
+        $srcWidth = imagesx($source);
+        $srcHeight = imagesy($source);
+
+        $dstWidth = $options->width ?? (int) round($srcWidth * ($options->height / $srcHeight));
+        $dstHeight = $options->height ?? (int) round($srcHeight * ($options->width / $srcWidth));
+
+        $dest = imagecreatetruecolor($dstWidth, $dstHeight);
+
+        if ($options->fileType === \App\Enums\FileType::Png) {
+            imagealphablending($dest, false);
+            imagesavealpha($dest, true);
+        }
+
+        imagecopyresampled($dest, $source, 0, 0, 0, 0, $dstWidth, $dstHeight, $srcWidth, $srcHeight);
+
+        match ($options->fileType) {
+            \App\Enums\FileType::Jpeg => imagejpeg($dest, $path, 95),
+            \App\Enums\FileType::Png => imagepng($dest, $path, 6),
+        };
+
+        imagedestroy($source);
+        imagedestroy($dest);
     }
 }
