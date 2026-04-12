@@ -2,6 +2,10 @@
 
 All notable changes to `banners-cli` will be documented in this file.
 
+## v1.2.2 - 2026-04-12
+
+**Full Changelog**: https://github.com/jeffersongoncalves/banners-cli/compare/v1.2.1...v1.2.2
+
 ## v1.2.1 - 2026-03-30
 
 **Full Changelog**: https://github.com/jeffersongoncalves/banners-cli/compare/v1.2.0...v1.2.1
@@ -20,6 +24,7 @@ All notable changes to `banners-cli` will be documented in this file.
 
 ```bash
 banners banner:generate "My Plugin" art/banner.jpeg --fileType=jpeg --width=2560 --height=1440
+
 
 
 ```
