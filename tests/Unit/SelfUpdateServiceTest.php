@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use App\Services\SelfUpdateService;
+use Tests\TestCase;
 
-uses(Tests\TestCase::class);
+uses(TestCase::class);
 
 it('returns current version from config', function () {
     config()->set('app.version', '1.5.0');

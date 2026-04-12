@@ -2,8 +2,10 @@
 
 use App\Services\BannerService;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
 beforeEach(function () {
@@ -56,9 +58,9 @@ it('generates a banner with all options', function () {
 
 it('shows error on failure', function () {
     $mock = new MockHandler([
-        new \GuzzleHttp\Exception\ConnectException(
+        new ConnectException(
             'Connection error',
-            new \GuzzleHttp\Psr7\Request('GET', 'test')
+            new Request('GET', 'test')
         ),
     ]);
     $handlerStack = HandlerStack::create($mock);

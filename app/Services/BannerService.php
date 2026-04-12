@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\DTOs\BannerOptions;
+use App\Enums\FileType;
 use GuzzleHttp\Client;
 use RuntimeException;
 
@@ -66,8 +67,8 @@ final class BannerService
         }
 
         $source = match ($options->fileType) {
-            \App\Enums\FileType::Jpeg => imagecreatefromjpeg($path),
-            \App\Enums\FileType::Png => imagecreatefrompng($path),
+            FileType::Jpeg => imagecreatefromjpeg($path),
+            FileType::Png => imagecreatefrompng($path),
         };
 
         if ($source === false) {
@@ -82,7 +83,7 @@ final class BannerService
 
         $dest = imagecreatetruecolor($dstWidth, $dstHeight);
 
-        if ($options->fileType === \App\Enums\FileType::Png) {
+        if ($options->fileType === FileType::Png) {
             imagealphablending($dest, false);
             imagesavealpha($dest, true);
         }
@@ -90,8 +91,8 @@ final class BannerService
         imagecopyresampled($dest, $source, 0, 0, 0, 0, $dstWidth, $dstHeight, $srcWidth, $srcHeight);
 
         match ($options->fileType) {
-            \App\Enums\FileType::Jpeg => imagejpeg($dest, $path, 95),
-            \App\Enums\FileType::Png => imagepng($dest, $path, 6),
+            FileType::Jpeg => imagejpeg($dest, $path, 95),
+            FileType::Png => imagepng($dest, $path, 6),
         };
 
         imagedestroy($source);
