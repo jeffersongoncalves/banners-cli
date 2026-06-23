@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "622d4e8099a0cb869dbe22f426bc9bbb",
+    "content-hash": "92ad6f3550e93d00a2379fe1ff34f92f",
     "packages": [],
     "packages-dev": [
         {
@@ -2023,6 +2023,59 @@
             "time": "2025-03-19T14:43:43+00:00"
         },
         {
+            "name": "jeffersongoncalves/laravel-zero-json-config",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeffersongoncalves/laravel-zero-json-config.git",
+                "reference": "fd3838dc45da2167f0fcb2c696da93f8888f5ac0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeffersongoncalves/laravel-zero-json-config/zipball/fd3838dc45da2167f0fcb2c696da93f8888f5ac0",
+                "reference": "fd3838dc45da2167f0fcb2c696da93f8888f5ac0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.25",
+                "mockery/mockery": "^1.6",
+                "pestphp/pest": "^3.8|^4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JeffersonGoncalves\\LaravelZero\\JsonConfig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jefferson Goncalves",
+                    "email": "jeffersongoncalves@users.noreply.github.com"
+                }
+            ],
+            "description": "Base JSON configuration service for CLIs, with scope strategies (global, per-repo, per-project), get/set/all and 0600 writes.",
+            "homepage": "https://github.com/jeffersongoncalves/laravel-zero-json-config",
+            "keywords": [
+                "cli",
+                "config",
+                "configuration",
+                "json",
+                "laravel-zero"
+            ],
+            "support": {
+                "issues": "https://github.com/jeffersongoncalves/laravel-zero-json-config/issues",
+                "source": "https://github.com/jeffersongoncalves/laravel-zero-json-config/tree/v1.0.0"
+            },
+            "time": "2026-06-23T00:47:19+00:00"
+        },
+        {
             "name": "jeffersongoncalves/laravel-zero-self-update",
             "version": "v1.0.0",
             "source": {
@@ -2077,6 +2130,60 @@
                 "source": "https://github.com/jeffersongoncalves/laravel-zero-self-update/tree/v1.0.0"
             },
             "time": "2026-06-23T00:47:13+00:00"
+        },
+        {
+            "name": "jeffersongoncalves/laravel-zero-support",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeffersongoncalves/laravel-zero-support.git",
+                "reference": "abd524fb679b871f42821acca904fea451b3c4f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeffersongoncalves/laravel-zero-support/zipball/abd524fb679b871f42821acca904fea451b3c4f3",
+                "reference": "abd524fb679b871f42821acca904fea451b3c4f3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.25",
+                "mockery/mockery": "^1.6",
+                "pestphp/pest": "^3.8|^4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JeffersonGoncalves\\LaravelZero\\Support\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jefferson Goncalves",
+                    "email": "jeffersongoncalves@users.noreply.github.com"
+                }
+            ],
+            "description": "Reusable base utilities for Laravel Zero CLIs: cross-OS home/config directory resolution, opening URLs in the default browser, and secure JSON writing.",
+            "homepage": "https://github.com/jeffersongoncalves/laravel-zero-support",
+            "keywords": [
+                "browser",
+                "cli",
+                "filesystem",
+                "laravel-zero",
+                "os",
+                "support"
+            ],
+            "support": {
+                "issues": "https://github.com/jeffersongoncalves/laravel-zero-support/issues",
+                "source": "https://github.com/jeffersongoncalves/laravel-zero-support/tree/v1.0.0"
+            },
+            "time": "2026-06-23T00:47:12+00:00"
         },
         {
             "name": "jolicode/jolinotif",

@@ -4,63 +4,52 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use JeffersonGoncalves\LaravelZero\JsonConfig\JsonConfigService;
+use JeffersonGoncalves\LaravelZero\JsonConfig\Scopes\GlobalScope;
+use JeffersonGoncalves\LaravelZero\JsonConfig\Scopes\PerProjectScope;
+use JeffersonGoncalves\LaravelZero\Support\Filesystem;
+
 final class ConfigService
 {
-    private string $configDir;
-
-    private string $configFile;
+    private readonly JsonConfigService $config;
 
     public function __construct(?string $configDir = null)
     {
-        $this->configDir = $configDir ?? $this->defaultConfigDir();
-        $this->configFile = $this->configDir.DIRECTORY_SEPARATOR.'config.json';
+        $scope = $configDir === null
+            ? new GlobalScope('banners-cli')
+            : new PerProjectScope($configDir, 'config.json');
+
+        $this->config = new JsonConfigService($scope);
     }
 
     public function configPath(): string
     {
-        return $this->configFile;
+        return $this->config->path();
     }
 
     public function exists(): bool
     {
-        return file_exists($this->configFile);
+        return file_exists($this->configPath());
     }
 
     public function all(): array
     {
-        if (! $this->exists()) {
-            return [];
-        }
-
-        $content = file_get_contents($this->configFile);
-
-        if ($content === false) {
-            return [];
-        }
-
-        $data = json_decode($content, true);
-
-        return is_array($data) ? $data : [];
+        return $this->config->all();
     }
 
     public function get(string $key, mixed $default = null): mixed
     {
-        $config = $this->all();
-
-        return $config[$key] ?? $default;
+        return $this->config->get($key, $default);
     }
 
     public function set(string $key, mixed $value): void
     {
-        $config = $this->all();
-        $config[$key] = $value;
-
-        $this->save($config);
+        $this->config->set($key, $value);
     }
 
     public function init(array $defaults): void
     {
-        $this->save($defaults);
+        Filesystem::writeJsonSecure($this->configPath(), $defaults);
     }
 
     public function validKeys(): array
@@ -85,26 +74,5 @@ final class ConfigService
     public function isValidKey(string $key): bool
     {
         return in_array($key, $this->validKeys(), true);
-    }
-
-    private function save(array $config): void
-    {
-        if (! is_dir($this->configDir)) {
-            mkdir($this->configDir, 0755, true);
-        }
-
-        file_put_contents(
-            $this->configFile,
-            json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n"
-        );
-    }
-
-    private function defaultConfigDir(): string
-    {
-        $home = PHP_OS_FAMILY === 'Windows'
-            ? ($_SERVER['USERPROFILE'] ?? $_SERVER['HOMEDRIVE'].$_SERVER['HOMEPATH'])
-            : ($_SERVER['HOME'] ?? '~');
-
-        return $home.DIRECTORY_SEPARATOR.'.banners-cli';
     }
 }
