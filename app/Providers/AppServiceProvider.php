@@ -6,8 +6,8 @@ namespace App\Providers;
 
 use App\Services\BannerService;
 use App\Services\ConfigService;
-use App\Services\SelfUpdateService;
 use Illuminate\Support\ServiceProvider;
+use JeffersonGoncalves\LaravelZero\SelfUpdate\PharUpdater;
 
 final class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +20,12 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(ConfigService::class);
         $this->app->singleton(BannerService::class);
-        $this->app->singleton(SelfUpdateService::class);
+
+        $this->app->singleton(PharUpdater::class, fn () => new PharUpdater(
+            githubRepo: 'jeffersongoncalves/banners-cli',
+            assetName: 'banners.phar',
+            tempPrefix: 'banners_',
+            currentVersion: (string) config('app.version', 'unreleased'),
+        ));
     }
 }
