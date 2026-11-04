@@ -12,7 +12,7 @@
   <a href="https://github.com/jeffersongoncalves/banners-cli/actions/workflows/tests.yml"><img src="https://github.com/jeffersongoncalves/banners-cli/actions/workflows/tests.yml/badge.svg" alt="Tests" /></a>
   <a href="https://github.com/jeffersongoncalves/banners-cli/actions/workflows/build.yml"><img src="https://github.com/jeffersongoncalves/banners-cli/actions/workflows/build.yml/badge.svg" alt="Build" /></a>
   <a href="https://github.com/jeffersongoncalves/banners-cli/releases/latest"><img src="https://img.shields.io/github/v/release/jeffersongoncalves/banners-cli" alt="Latest Release" /></a>
-  <img src="https://img.shields.io/badge/php-%3E%3D8.2-8892BF" alt="PHP 8.2+" />
+  <img src="https://img.shields.io/badge/php-%3E%3D8.3-8892BF" alt="PHP 8.3+" />
   <a href="LICENSE"><img src="https://img.shields.io/github/license/jeffersongoncalves/banners-cli" alt="License" /></a>
 </p>
 
@@ -20,7 +20,7 @@ CLI tool to generate banner images using the [beyondcode/banners](https://banner
 
 ## Requirements
 
-- PHP >= 8.2
+- PHP >= 8.3
 
 ## Installation
 
